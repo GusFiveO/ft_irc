@@ -6,7 +6,7 @@
 /*   By: alorain <alorain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 14:25:42 by alorain           #+#    #+#             */
-/*   Updated: 2022/11/25 22:33:15 by alorain          ###   ########.fr       */
+/*   Updated: 2022/11/26 16:13:31 by alorain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ Network::Network() :
 
 Network::~Network()
 {
+	cleawr();
 }
 
 void

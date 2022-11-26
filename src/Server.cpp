@@ -6,7 +6,7 @@
 /*   By: alorain <alorain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 12:08:20 by alorain           #+#    #+#             */
-/*   Updated: 2022/11/25 22:08:26 by alorain          ###   ########.fr       */
+/*   Updated: 2022/11/26 16:13:21 by alorain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ Server::Server(int port, std::string pwd) :
 
 Server::~Server()
 {
+	clear();
 }
 
 int
@@ -91,16 +92,11 @@ Server::run()
 	{
 		return false;
 	}
-	if (_pollFds.size() != 0 && pollConnec() == -1)
+	if (_pollFds.size() != 0 && pollConnec() == 1)
 	{
 		return false;
 	}
 	_servSock->getNewConnexions();
-	//newConnection = _servSock->getNewConnexions();
-	//if (newConnection)
-	//{
-	//	g_network.addConnexion(newConnection);
-	//}
 	return true;
 }
 
@@ -136,7 +132,6 @@ Server::servLoop()
 		}
 		if (g_status == STOP)
 		{
-			clear();
 			break;
 		}
 	}
@@ -151,7 +146,6 @@ Server::clear()
 	{
 		close(it->fd);
 	}
-	g_network.clear();
 	delete _servSock;
 }
 
@@ -160,21 +154,6 @@ Server::getNewConnexions()
 {
 	_servSock->getNewConnexions();
 }
-
-//void
-//Server::receive(size_t idx)
-//{
-//	User* user;
-//	try
-//	{
-//		user =  g_network.getUser(idx -	1);
-//	}
-//	catch(...)
-//	{
-//		throw;
-//	}
-//	user->receive();
-//}
 
 size_t
 Server::getNbOfCo() const
